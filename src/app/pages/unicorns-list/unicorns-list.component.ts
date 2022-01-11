@@ -11,6 +11,8 @@ export class UnicornsListComponent {
   public unicorns: Unicorn[] = [];
 
   constructor(private unicornsService: UnicornsService) {
-    this.unicornsService.getUnicorns().subscribe((unicorns) => (this.unicorns = unicorns));
+    this.unicornsService.getUnicorns().subscribe((unicorns) => {
+      this.unicorns = unicorns;
+    });
   }
 }

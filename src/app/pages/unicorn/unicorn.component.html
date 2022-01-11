@@ -1,0 +1,5 @@
+<div *ngIf="unicorn">
+  {{ unicorn.name }}
+  <a mat-raised-button [routerLink]="['/unicorn', unicorn.id - 1]">Previous</a>
+  <a mat-raised-button [routerLink]="['/unicorn', unicorn.id + 1]">Next</a>
+</div>
