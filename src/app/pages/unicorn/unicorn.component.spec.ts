@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { UnicornComponent } from './unicorn.component';
 
 describe('UnicornComponent', () => {
@@ -8,9 +7,8 @@ describe('UnicornComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ UnicornComponent ]
-    })
-    .compileComponents();
+      declarations: [UnicornComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
