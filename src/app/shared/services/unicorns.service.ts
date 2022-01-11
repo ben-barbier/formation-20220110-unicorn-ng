@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { concatAll, filter, from, mergeMap, Observable, toArray } from 'rxjs';
+import { concatAll, filter, forkJoin, from, mergeMap, Observable, retry, toArray } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../../environments/environment';
 import { Capacity } from '../models/capacity.model';
@@ -14,7 +14,7 @@ export class UnicornsService {
   constructor(private http: HttpClient, private capacitiesService: CapacitiesService) {}
 
   public getUnicorns(): Observable<Unicorn[]> {
-    return this.http.get<Unicorn[]>(`${environment.apiUrl}/unicorns`);
+    return this.http.get<Unicorn[]>(`${environment.apiUrl}/unicorns`).pipe(retry(2));
   }
 
   public getMoreFiveYearsUnicornsBienNourries(): Observable<Unicorn[]> {
@@ -45,6 +45,14 @@ export class UnicornsService {
       }),
       toArray(),
       map((unicorns) => [...unicorns].sort((u1, u2) => u1.id - u2.id))
+    );
+  }
+
+  public getAllWithCapacitiesLabels2(): Observable<Unicorn[]> {
+    return forkJoin([this.getUnicorns(), this.capacitiesService.getCapacities()]).pipe(
+      map(([unicorns, capacities]: [Unicorn[], Capacity[]]) => {
+        return unicorns;
+      })
     );
   }
 }

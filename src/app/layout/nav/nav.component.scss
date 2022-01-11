@@ -19,3 +19,13 @@
 .active {
   color: red;
 }
+
+.spacer {
+  flex: 1 0 auto;
+}
+
+.cart-count {
+  display: flex;
+  align-items: center;
+  margin-right: 1.5rem;
+}

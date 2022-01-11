@@ -10,6 +10,10 @@ import { Capacity } from '../models/capacity.model';
 export class CapacitiesService {
   constructor(private http: HttpClient) {}
 
+  public getCapacities(): Observable<Capacity[]> {
+    return this.http.get<Capacity[]>(`${environment.apiUrl}/capacities`);
+  }
+
   public getCapacity(id: number): Observable<Capacity> {
     return this.http.get<Capacity>(`${environment.apiUrl}/capacities/${id}`);
   }
